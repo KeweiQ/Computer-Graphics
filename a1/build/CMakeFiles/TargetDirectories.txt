@@ -1,3 +1,0 @@
-/home/qiukewei/csc317/private317/a1/build/CMakeFiles/rebuild_cache.dir
-/home/qiukewei/csc317/private317/a1/build/CMakeFiles/edit_cache.dir
-/home/qiukewei/csc317/private317/a1/build/CMakeFiles/raster.dir
