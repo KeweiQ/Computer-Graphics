@@ -9,6 +9,23 @@ void rotate(
 {
   rotated.resize(height*width*num_channels);
   ////////////////////////////////////////////////////////////////////////////
-  // Add your code here
+  
+  if (num_channels == 3) {
+    for (int i=0; i<width; i++) {
+      for (int j=0; j<height; j++) {
+        rotated[3 * (i*height + j)] = input[3 * ((j+1)*width - i - 1)];
+        rotated[3 * (i*height + j) + 1] = input[3 * ((j+1)*width - i - 1) + 1];
+        rotated[3 * (i*height + j) + 2] = input[3 * ((j+1)*width - i - 1) + 2];
+      }
+    }
+
+  } else if (num_channels == 1) {
+    for (int i=0; i<width; i++) {
+      for (int j=0; j<height; j++) {
+        rotated[i*height + j] = input[(j+1)*width - i - 1];
+      }
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 }
