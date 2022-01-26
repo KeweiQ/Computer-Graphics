@@ -9,8 +9,28 @@ bool first_hit(
   Eigen::Vector3d & n)
 {
   ////////////////////////////////////////////////////////////////////////////
-  // Replace with your code here:
-  return false;
+
+  double minimum = std::numeric_limits<double>::infinity();;
+  bool found = false;
+  double t_temp;
+  Eigen::Vector3d n_temp;
+  
+  for (int i=0; i<objects.size(); i++) {
+    std::shared_ptr<Object> object = objects[i];
+    bool inter = object->intersect(ray, min_t, t_temp, n_temp);
+   
+    if (inter) {
+      found = true;
+      if (t_temp < minimum) {
+        hit_id = i;
+        minimum = t_temp;
+        t = t_temp;
+        n = n_temp;
+      }
+    }
+  }
+
+  return found;
+  
   ////////////////////////////////////////////////////////////////////////////
 }
-

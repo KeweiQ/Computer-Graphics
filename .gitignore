@@ -31,5 +31,6 @@
 */*.un~
 */*.swo
 */*.swp
-*/build/*
+*/build*/*
 */*.DS_Store
+.vscode/*
