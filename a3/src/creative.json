@@ -1,7 +1,7 @@
 {
   "camera": {
     "type": "perspective",
-    "focal_length": 3,
+    "focal_length": 2,
     "eye": [0,0,5],
     "up": [0,1,0],
     "look": [0,0,-1],
@@ -9,9 +9,74 @@
     "width": 1.7777777778
   },
   "materials": [
+    {
+      "name": "blue metal",
+      "ka": [0.215686,0.494118,0.721569],
+      "kd": [0.215686,0.494118,0.721569],
+      "ks": [0.215686,0.494118,0.721569],
+      "km": [0.215686,0.494118,0.721569],
+      "phong_exponent": 2000
+    },
+    {
+      "name": "green metal",
+      "ka": [0.301961,0.686275,0.290196],
+      "kd": [0.301961,0.686275,0.290196],
+      "ks": [0.301961,0.686275,0.290196],
+      "km": [0.301961,0.686275,0.290196],
+      "phong_exponent": 2000
+    },
+    {
+      "name": "red metal",
+      "ka": [0.594118,0.101961,0.109804],
+      "kd": [0.594118,0.101961,0.109804],
+      "ks": [0.594118,0.101961,0.109804],
+      "km": [0.594118,0.101961,0.109804],
+      "phong_exponent": 2000
+    },
+    {
+      "name": "purple metal",
+      "ka": [0.596078,0.305882,0.639216],
+      "kd": [0.596078,0.305882,0.639216],
+      "ks": [0.596078,0.305882,0.639216],
+      "km": [0.596078,0.305882,0.639216],
+      "phong_exponent": 2000
+    }
   ],
   "lights":[
+    {
+      "type": "point",
+      "position": [-5,10,5],
+      "color": [0.8,0.8,0.8]
+    },
+    {
+      "type": "directional",
+      "direction": [0,0,-1],
+      "color": [0.4,0.4,0.4]
+    }
   ],
+
   "objects": [
+    {
+      "type": "soup",
+      "material": "purple metal",
+      "stl": "bunny.stl"
+    },
+    {
+      "type": "soup",
+      "material": "red metal",
+      "stl": "skull.stl"
+    },
+    {
+      "type": "plane",
+      "material": "green metal",
+      "point": [0,-0.69,0],
+      "normal": [0,1,0]
+    },
+    {
+      "type": "plane",
+      "material": "blue metal",
+      "point": [0,0,-1],
+      "normal": [0,0,1]
+    }
   ]
 }
