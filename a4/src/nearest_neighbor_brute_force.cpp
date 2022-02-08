@@ -8,8 +8,22 @@ void nearest_neighbor_brute_force(
   double & sqrD)
 {
   ////////////////////////////////////////////////////////////////////////////
-  // Replace with your code here:
+  
   I = -1;
-  sqrD = 0;
+  sqrD = std::numeric_limits<double>::infinity();
+  const int num_points = points.rows();
+  Eigen::RowVector3d point;
+  double sqrD_temp;
+
+  for (int i=0; i<num_points; i++) {
+    point = points.row(i);
+    sqrD_temp = (point - query).squaredNorm();
+
+    if (sqrD_temp < sqrD) {
+      sqrD = sqrD_temp;
+      I = i;
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 }

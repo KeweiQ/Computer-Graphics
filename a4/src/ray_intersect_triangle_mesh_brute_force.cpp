@@ -11,9 +11,31 @@ bool ray_intersect_triangle_mesh_brute_force(
   int & hit_f)
 {
   ////////////////////////////////////////////////////////////////////////////
-  // Replace with your code here:
-  hit_t = 0;
-  hit_f = 0;
-  return false;
+  
+  const int num_f = F.rows();
+  double t_temp;
+  hit_t = std::numeric_limits<double>::infinity();
+  hit_f = -1;
+  
+
+  for (int i=0; i<num_f; i++) {
+    const Eigen::RowVector3d & A = V.row(F(i, 0));
+    const Eigen::RowVector3d & B = V.row(F(i, 1));
+    const Eigen::RowVector3d & C = V.row(F(i, 2));
+
+    if (ray_intersect_triangle(ray, A, B, C, min_t, max_t, t_temp)) {
+      if (t_temp < hit_t) {
+        hit_t = t_temp;
+        hit_f = i;
+      }
+    }
+  }
+
+  if (hit_f >= 0) {
+    return true;
+  } else {
+    return false;
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 }
