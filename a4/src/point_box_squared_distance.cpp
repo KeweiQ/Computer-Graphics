@@ -14,5 +14,6 @@ double point_box_squared_distance(
   double squared_distance = pow(dist_x, 2) + pow(dist_y, 2) + pow(dist_z, 2);
 
   return squared_distance;
+  
   ////////////////////////////////////////////////////////////////////////////
 }
