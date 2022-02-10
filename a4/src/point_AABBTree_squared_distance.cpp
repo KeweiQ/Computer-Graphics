@@ -3,7 +3,6 @@
 #include <utility>
 
 typedef std::pair<double, std::shared_ptr<Object>> pq_element;
-typedef std::pair<std::shared_ptr<Object>, double> queue_obj;
 
 bool point_AABBTree_squared_distance(
     const Eigen::RowVector3d & query,
