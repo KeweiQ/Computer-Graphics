@@ -10,6 +10,7 @@ bool ray_intersect_triangle(
   double & t)
 {
   ////////////////////////////////////////////////////////////////////////////
+  
   Eigen::Vector3d AB = A.transpose() - B.transpose();
   Eigen::Vector3d AC = A.transpose() - C.transpose();
   Eigen::Vector3d D = ray.direction;

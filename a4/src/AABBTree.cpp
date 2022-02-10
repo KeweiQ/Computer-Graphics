@@ -41,12 +41,12 @@ AABBTree::AABBTree(
         axis = i;
       }
     }
-    int midpoint = box_of_all.center()(axis);
+    double midpoint = box_of_all.center()(axis);
 
     // saperate original object list into 2 sublists according to midpoint
     std::vector<std::shared_ptr<Object>> left_objects;
     std::vector<std::shared_ptr<Object>> right_objects;
-    int center;
+    double center;
     for (int i=0; i<num_leaves; i++) {
       center = objects[i]->box.center()[axis];
       if (center <= midpoint) {

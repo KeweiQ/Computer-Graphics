@@ -17,7 +17,6 @@ bool ray_intersect_triangle_mesh_brute_force(
   hit_t = std::numeric_limits<double>::infinity();
   hit_f = -1;
   
-
   for (int i=0; i<num_f; i++) {
     const Eigen::RowVector3d & A = V.row(F(i, 0));
     const Eigen::RowVector3d & B = V.row(F(i, 1));
