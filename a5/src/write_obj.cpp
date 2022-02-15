@@ -36,10 +36,10 @@ bool write_obj(
   }
 
   // list of all indices, in vertex index/vertex texture coordinate index/vertex normal index form
-  for (int i = 0; i < F.rows(); ++i) { // in C++ indices start at 0, but in a .obj file indices start at 1
+  for (int i = 0; i < F.rows(); i++) { // in C++ indices start at 0, but in a .obj file indices start at 1
     pfile << "f ";
     for (int j = 0; j < F.cols(); j++) {
-      pfile << F(i, j) << "/" << UF(i, j) << "/" << NF(i, j) << " ";
+      pfile << F(i, j) + 1 << "/" << UF(i, j) + 1 << "/" << NF(i, j) + 1 << " ";
     }
     pfile << std::endl;
   }
