@@ -12,6 +12,16 @@ void sphere(
   Eigen::MatrixXi & NF)
 {
   ////////////////////////////////////////////////////////////////////////////
-  // Add your code here:
+  
+  const double num_faces = num_faces_u * num_faces_v;
+  const double num_vertices = num_faces_u * (num_faces_v - 1)+ 2;
+
+  V.resize(num_vertices, 3);
+  F.resize(num_faces, 4);
+  UV.resize(num_vertices, 2);
+  UF.resize(num_faces, 4);
+  NV.resize(num_faces, 3);
+  NF.resize(num_faces, 4);
+
   ////////////////////////////////////////////////////////////////////////////
 }
