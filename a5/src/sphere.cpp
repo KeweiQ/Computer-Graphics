@@ -27,94 +27,39 @@ void sphere(
 
   // calculate V, UV, NV
   int row = 0;
-  // int v_row = 0;
-  // int uv_row = 0;
 
-  // // 3d vertex on the south pole
-  // V.row(v_row) << 0, 0, -radius;
-  // v_row += 1;
-
-  // // 2d coordinate on the botton of the texture
-  // for (int i = 0; i < num_faces_u + 1; i++) {
-  //   UV.row(uv_row) << i / num_faces_u, 0;
-  //   uv_row += 1;
-  // }
-
-  for (int v = 0; v < num_faces_v + 1; v++) {
-    for (int u = 0; u < num_faces_u + 1; u++) {
-      double theta = 2 * u * M_PI / num_faces_u;
-      double phi = v * M_PI / num_faces_v;
+  for (int u = 0; u < num_faces_u+ 1; u++) {
+    for (int v = 0; v < num_faces_v + 1; v++) {
+      double theta = 2 * static_cast<double>(u) * M_PI / num_faces_u;
+      double phi = static_cast<double>(v) * M_PI / num_faces_v;
       
-      double x = radius * cos(phi) * sin(theta);
-      double y = radius * sin(phi) * sin(theta);
-      double z = radius * cos(theta);
+      double x = radius * cos(theta) * sin(phi);
+      double z = radius * sin(theta) * sin(phi);
+      double y = -radius * cos(phi);
 
       V.row(row) << x, y, z;
-      UV.row(row) << static_cast<double>(u) / num_faces_u, static_cast<double>(v) / num_faces_v;
+      UV.row(row) << 1 - static_cast<double>(u) / num_faces_u, static_cast<double>(v) / num_faces_v;
       NV.row(row) << x, y, z;
       row += 1;
     }
-
-    // // 2d coordinate on the right edge of the texture
-    // UV.row(uv_row) <<  1, v / num_faces_v;
-    // uv_row += 1;
   }
-
-  // // 3d vertex on the north pole
-  // V.row(v_row) << 0, 0, radius;
-  // v_row += 1;
-
-  // // 2d coordinate on the top of the texture
-  // for (int i = 0; i < num_faces_u + 1; i++) {
-  //   UV.row(uv_row) << i / num_faces_u, 1;
-  //   uv_row += 1;
-  // }
-
-  // NV = V.normalized();
 
   // calculate F, UF, NF
   row = 0;
 
-  // int f_row = 0;
-  // int uf_row = 0;
-  // bool botton = false;
-  // bool top = false;
-  // bool right = false;
+  for (int u = 0; u < num_faces_u; u++) {
+    for (int v = 0; v < num_faces_v; v++) {
+      int botton_left = u * (num_faces_v + 1) + v;
+      int botton_right = u * (num_faces_v + 1) + v + 1;
+      int top_left = (u + 1) * (num_faces_v + 1) + v;
+      int top_right = (u + 1) * (num_faces_v + 1) + v + 1;
 
-  for (int v = 0; v < num_faces_v; v++) {
-    for (int u = 0; u < num_faces_u; u++) {
-      int botton_left = v * (num_faces_u + 1) + u;
-      int botton_right = v * (num_faces_u + 1) + u + 1;
-      int top_left = (v + 1) * (num_faces_u + 1) + u;
-      int top_right = (v + 1) * (num_faces_u + 1) + u + 1;
-
-      // if (v == 0) {
-      //   botton_left = botton_right = 0;
-      // }
-      // if (v == num_faces_v - 1) {
-      //   top_left = top_right = V.rows() - 1;
-      // }
-      // if (u == num_faces_u - 1) {
-      //   botton_right -= u;
-      //   top_right -= u;
-      // }
-
-      F.row(row) << botton_left, botton_right, top_right, top_left;
-      UF.row(row) << botton_left, botton_right, top_right, top_left;
-      NF.row(row) << botton_left, botton_right, top_right, top_left;
+      F.row(row) << botton_left, top_left, top_right, botton_right;
+      UF.row(row) << botton_left, top_left, top_right, botton_right;
+      NF.row(row) << botton_left, top_left, top_right, botton_right;
       row += 1;
-
-      // botton_left = v * (num_faces_u + 1) + u;
-      // botton_right = v * (num_faces_u + 1) + u + 1;
-      // top_left = (v + 1) * (num_faces_u + 1) + u;
-      // top_right = (v + 1) * (num_faces_u + 1) + u + 1;
-
-      // UF.row(uf_row) << botton_left, botton_right, top_right, top_left;
-      // uf_row += 1;
     }
   }
-
-  // NF = F;
 
   ////////////////////////////////////////////////////////////////////////////
 }
