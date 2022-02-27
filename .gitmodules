@@ -2,6 +2,10 @@
 	path = eigen
 	url = https://github.com/eigenteam/eigen-git-mirror
 
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/glfw/glfw.git
+
 [submodule "libigl"]
 	path = libigl
 	url = https://github.com/libigl/libigl
