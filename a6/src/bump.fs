@@ -39,6 +39,16 @@ void main()
   vec3 ka, ks, kd;
   float p;
   vec3 n, v, l;
+  
+  vec3 T, B;
+  tangent(normalize(sphere_fs_in), T, B);
+  vec3 b_sphere_fs_in = bump_position(is_moon, sphere_fs_in);
+  vec3 perceived_n = cross((bump_position(is_moon, sphere_fs_in + T * 0.0001) - bump_position(is_moon, sphere_fs_in)) / 0.0001, 
+  	(bump_position(is_moon, sphere_fs_in + B * 0.0001) - bump_position(is_moon, sphere_fs_in)) / 0.0001);
+  if (dot(sphere_fs_in, perceived_n) < 0){
+    perceived_n = -perceived_n;
+  }
+  vec3 bumped_normal = (transpose(inverse(view)) * transpose(inverse(model(is_moon, animation_seconds))) * vec4(normalize(perceived_n), 1.0)).xyz;
 
   if (is_moon) {
     ka = vec3(0.01, 0.01, 0.01);
@@ -52,7 +62,7 @@ void main()
     p = 500;
   }
 
-  n = normalize(normal_fs_in);
+  n = normalize(bumped_normal);
   v = -normalize(view_pos_fs_in.xyz);
   l = normalize(light.xyz - view_pos_fs_in.xyz);
 
