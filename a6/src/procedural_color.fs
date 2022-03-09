@@ -37,14 +37,16 @@ void main()
   float p;
   vec3 n, v, l;
 
+  float noise = abs(sin((10 * perlin_noise(sphere_fs_in)) * M_PI));
+
   if (is_moon) {
     ka = vec3(0.01, 0.01, 0.01);
-    ks = vec3(0.9, 0.9, 0.9);
+    ks = vec3(0.9, 0.9, 0.9) * noise;
     kd = vec3(0.4, 0.4, 0.4);
     p = 500;
   } else {
     ka = vec3(0.01, 0.02, 0.05);
-    ks = vec3(0.9, 0.9, 0.9);
+    ks = vec3(0.9, 0.9, 0.9) * noise;
     kd = vec3(0.15, 0.25, 0.8);
     p = 500;
   }

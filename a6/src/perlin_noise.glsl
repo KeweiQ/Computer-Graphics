@@ -43,14 +43,14 @@ float perlin_noise(vec3 st)
   vec3 d111 = st - p111;
   vec3 d011 = st - p011;
 
-  float i000 = dot(d000, d000);
-  float i100 = dot(d100, d100);
-  float i110 = dot(d110, d110);
-  float i010 = dot(d010, d010);
-  float i001 = dot(d001, d001);
-  float i101 = dot(d101, d101);
-  float i111 = dot(d111, d111);
-  float i011 = dot(d011, d011);
+  float i000 = dot(d000, g000);
+  float i100 = dot(d100, g100);
+  float i110 = dot(d110, g110);
+  float i010 = dot(d010, g010);
+  float i001 = dot(d001, g001);
+  float i101 = dot(d101, g101);
+  float i111 = dot(d111, g111);
+  float i011 = dot(d011, g011);
 
   float mix_x1 = mix(i000, i100, smoothed_point.x);
   float mix_x2 = mix(i010, i110, smoothed_point.x);
