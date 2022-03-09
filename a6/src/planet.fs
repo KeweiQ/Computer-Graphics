@@ -51,7 +51,8 @@ void main()
 
   // color
   float shore = 0.001;
-  float land = 0.7;
+  float plane = 0.7;
+  float plateau = 0.9;
   float height = 30 * bump_height(is_moon, sphere_fs_in);
 
   vec3 ka, ks, kd;
@@ -63,21 +64,31 @@ void main()
     kd = vec3(0.6, 0.6, 0.6);
     ks = vec3(0.7, 0.7, 0.7);
     p = 200;
-    
+
   } else {
+    // mid value
+    // ka = vec3(0.01, 0.05, 0.02);
+    // kd = vec3(0.3, 0.8, 0.5);
+    // ks = vec3(0.7, 0.7, 0.7);
+
     if (height < shore) {
       ka = vec3(0.01, 0.02, 0.05);
       kd = vec3(0.3, 0.4, 0.9);
       ks = vec3(0.7, 0.7, 0.7);
 
-    } else if (height < land) {
+    } else if (height < plane) {
       ka = vec3(0.01, 0.05, 0.02);
-      kd = vec3(0.3, 0.9, 0.4);
+      kd = vec3(0.3, 0.4 * improved_smooth_step(height) + 0.4, 0.4 * improved_smooth_step(-1.0 * height) + 0.5);
+      ks = vec3(0.7, 0.7, 0.7);
+
+    } else if (height < plateau) {
+      ka = vec3(0.01, 0.05, 0.02);
+      kd = vec3(0.4 * improved_smooth_step(height) + 0.3, 0.8, 0.4 * improved_smooth_step(-1.0 * height) + 0.1);
       ks = vec3(0.7, 0.7, 0.7);
 
     } else {
       ka = vec3(0.04, 0.04, 0.01);
-      kd = vec3(0.8, 0.8, 0.1);
+      kd = vec3(0.7, 0.8, 0.1);
       ks = vec3(0.7, 0.7, 0.7);
 
     }
