@@ -10,10 +10,11 @@
 // Hint: for a unit sphere object, you might use s=p=n
 //
 // expects: bump_height
-vec3 bump_position(bool is_moon , vec3 s)
+vec3 bump_position(bool is_moon, vec3 s)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return s;
+  
+  return s + bump_height(is_moon, s) * s;
+
   /////////////////////////////////////////////////////////////////////////////
 }

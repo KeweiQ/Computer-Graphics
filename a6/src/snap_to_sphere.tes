@@ -22,13 +22,21 @@ out vec3 normal_fs_in;
 //                      3D position _before_ applying model, view or projection
 //                      transformations (e.g., point on unit sphere)
 out vec3 sphere_fs_in;
-// expects: interpolat, model, 
+// expects: interpolate, model, 
 void main()
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  pos_fs_in = interpolate(gl_TessCoord, pos_es_in[0], pos_es_in[1], pos_es_in[2]);
+
+  mat4 model = model(is_moon, animation_seconds);
+  vec4 sphere = vec4(normalize(interpolate(gl_TessCoord, pos_es_in[0].xyz, pos_es_in[1].xyz, pos_es_in[2].xyz)), 1.0);
+
+  pos_fs_in = proj * view * model * sphere;
+  view_pos_fs_in = view * model * sphere;
+  normal_fs_in = (transpose(inverse(view * model)) * sphere).xyz;
+  sphere_fs_in = sphere.xyz;
+
   gl_Position = pos_fs_in;
+
   /////////////////////////////////////////////////////////////////////////////
 }
 

@@ -6,10 +6,17 @@
 //   s  3D position of seed for noise generation
 // Returns elevation adjust along normal (values between -0.1 and 0.1 are
 //   reasonable.
-float bump_height( bool is_moon, vec3 s)
+float bump_height(bool is_moon, vec3 s)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return 0 ;
+  
+  if (is_moon) {
+    float noise = improved_perlin_noise(2 * s);
+    return 0.5 * smooth_heaviside(noise, 100);
+  } else {
+    float noise = improved_perlin_noise(s);
+    return 0.5 * smooth_heaviside(noise, 10);
+  }
+  
   /////////////////////////////////////////////////////////////////////////////
 }
