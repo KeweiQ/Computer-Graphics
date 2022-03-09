@@ -36,10 +36,6 @@ void main()
     0, 0, 0, 1);
   vec4 light = view * light_rotate * light_translate * vec4(0.0, 0.0, 0.0, 1.0);
 
-  vec3 ka, ks, kd;
-  float p;
-  vec3 n, v, l;
-  
   vec3 T, B;
   tangent(normalize(sphere_fs_in), T, B);
   vec3 b_sphere_fs_in = bump_position(is_moon, sphere_fs_in);
@@ -50,16 +46,20 @@ void main()
   }
   vec3 bumped_normal = (transpose(inverse(view)) * transpose(inverse(model(is_moon, animation_seconds))) * vec4(normalize(perceived_n), 1.0)).xyz;
 
+  vec3 ka, ks, kd;
+  float p;
+  vec3 n, v, l;
+  
   if (is_moon) {
     ka = vec3(0.01, 0.01, 0.01);
     ks = vec3(0.9, 0.9, 0.9);
-    kd = vec3(0.4, 0.4, 0.4);
-    p = 500;
+    kd = vec3(0.5, 0.5, 0.5);
+    p = 2000;
   } else {
     ka = vec3(0.01, 0.02, 0.05);
     ks = vec3(0.9, 0.9, 0.9);
-    kd = vec3(0.15, 0.25, 0.8);
-    p = 500;
+    kd = vec3(0.25, 0.35, 0.85);
+    p = 1000;
   }
 
   n = normalize(bumped_normal);
