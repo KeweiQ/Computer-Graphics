@@ -8,7 +8,22 @@ void linear_blend_skinning(
   Eigen::MatrixXd & U)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code
-  U = V;
+  
+  U.resize(V.rows(), 3);
+
+  for (int i = 0; i < V.rows(); i++) {
+    Eigen::Vector3d vertex = V.row(i).transpose();
+
+    for (int j = 0; j < skeleton.size(); j++) {
+      if (W(i, skeleton[j].weight_index) > -1) {
+        vertex += T[j] * vertex * W(i, skeleton[j].weight_index);
+      }
+    }
+
+    U(i, 0) = vertex(0);
+    U(i, 1) = vertex(1);
+    U(i, 2) = vertex(2);
+  }
+
   /////////////////////////////////////////////////////////////////////////////
 }
