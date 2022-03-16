@@ -4,7 +4,6 @@ Eigen::Affine3d euler_angles_to_transform(
   const Eigen::Vector3d & xzx)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code
   
   double theta1 = xzx[0] * M_PI/180.0; 
   double theta2 = xzx[1] * M_PI/180.0; 

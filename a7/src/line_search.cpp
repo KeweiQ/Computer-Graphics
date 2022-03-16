@@ -11,12 +11,12 @@ double line_search(
   /////////////////////////////////////////////////////////////////////////////
   
   double sigma = max_step;
-  Eigen::VectorXd new_z = z * sigma * dz;
+  Eigen::VectorXd new_z = z - sigma * dz;
   proj_z(new_z);
 
   while (f(new_z) > f(z)) {
     sigma /= 2.0;
-    new_z = z * sigma * dz;
+    new_z = z - sigma * dz;
     proj_z(new_z);
   }
 

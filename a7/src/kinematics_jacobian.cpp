@@ -11,15 +11,15 @@ void kinematics_jacobian(
   
   J.resize(b.size() * 3, skeleton.size() * 3);
   Eigen::VectorXd transformed = transformed_tips(skeleton, b);
-  Skeleton copy = skeleton;
   double da = 1.0e-7;
 
-  for (int i = 0; i < skeleton.size(); i++){
-    for (int j = 0; j < 3; j++){
-      copy[i].xzx[j] += da;
-      Eigen::VectorXd dx = transformed_tips(copy, b) - transformed;
+  for (int i = 0; i < skeleton.size(); i++) {
+    for (int j = 0; j < 3; j++) {
+      Skeleton skeleton_copy = skeleton;
+      skeleton_copy[i].xzx[j] += da;
+      Eigen::VectorXd dx = transformed_tips(skeleton_copy, b) - transformed;
 
-      for (int k = 0; k < b.size() * 3; k++){
+      for (int k = 0; k < b.size() * 3; k++) {
         J(k, i * 3 + j) = dx[k] / da;
       }
     }
