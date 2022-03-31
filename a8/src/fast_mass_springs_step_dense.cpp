@@ -18,11 +18,22 @@ void fast_mass_springs_step_dense(
   Eigen::MatrixXd & Unext)
 {
   //////////////////////////////////////////////////////////////////////////////
-  // Replace with your code
-  for(int iter = 0;iter < 50;iter++)
-  {
-    const Eigen::MatrixXd l = Ucur;
+  
+  Eigen::MatrixXd y = ((M * (2 * Ucur - Uprev)) / std::pow(delta_t, 2)) + fext;
+
+  double w = 1e10;
+  Eigen::MatrixXd d;
+  d.resize(E.rows(), 3);
+  Unext = Ucur;
+
+  for (int iter=0; iter<50; iter++) {
+    for (int i=0; i<E.rows(); i++) {
+      d.row(i) = r[i] * (Unext.row(E(i, 0)) - Unext.row(E(i, 1))).normalized();
+    }
+
+    const Eigen::MatrixXd l = k * A.transpose() * d + y + w * C.transpose() * C * V;
     Unext = prefactorization.solve(l);
   }
+
   //////////////////////////////////////////////////////////////////////////////
 }
