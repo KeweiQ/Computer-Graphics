@@ -39,9 +39,8 @@ bool fast_mass_springs_precomputation_sparse(
   C.setFromTriplets(ijv.begin(), ijv.end());
   ijv.clear();
 
-  Eigen::SparseMatrix<double> Q(V.rows(), V.rows());
   double w = 1e10;
-  Q = k * A.transpose() * A + M / std::pow(delta_t, 2) + w * C.transpose() * C;
+  Eigen::SparseMatrix<double> Q = k * A.transpose() * A + M / std::pow(delta_t, 2) + w * C.transpose() * C;
 
   /////////////////////////////////////////////////////////////////////////////
   prefactorization.compute(Q);

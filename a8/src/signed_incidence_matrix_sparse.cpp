@@ -12,7 +12,7 @@ void signed_incidence_matrix_sparse(
   
   for (int i=0; i<E.rows(); i++) {
     ijv.emplace_back(i, E(i, 0), 1);
-    ijv.emplace_back(i, E(i, 1), 1);
+    ijv.emplace_back(i, E(i, 1), -1);
   }
   
   A.resize(E.rows(),n);
